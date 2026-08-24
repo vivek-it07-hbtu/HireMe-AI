@@ -158,26 +158,22 @@ def read_pdf(file_path: Path):
         if page_text:
             text += page_text + "\n"
     return text
-
 @app.get("/")
 def home():
+    # resume_text=read_pdf(Path("my_resume.pdf"))
+    # resume=parse_resume(resume_text)
     return {
-        "message": "HireMe-AI backend is running!"
+        "message" : "Ye home page hai"
     }
+# chatgpt.cpom
+#chatgot.com/aceeddferre5e
 
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    resume_path = Path(__file__).parent / "my_resume.pdf"
-
-    resume_text = read_pdf(resume_path)
-    resume = parse_resume(resume_text)
-
-    answer = ask_candidate(
-        request.question,
-        resume
-    )
-
+    resume_text=read_pdf(Path("my_resume.pdf"))
+    resume=parse_resume(resume_text)
+    answer=ask_candidate(request.question, resume)
     return {
         "answer": answer
     }
