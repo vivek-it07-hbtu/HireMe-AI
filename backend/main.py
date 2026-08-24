@@ -7,6 +7,7 @@ from fastapi import FastAPI
 from pathlib import Path
 from pydantic import BaseModel
 from pypdf import PdfReader
+from fastapi.middleware.cors import CORSMiddleware
 
 load_dotenv()
 my_api_key=os.getenv("GROQ_API_KEY")
@@ -18,6 +19,16 @@ client=Groq(api_key=my_api_key)
 model = "openai/gpt-oss-120b"
 
 app=FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        "http://localhost:5173",
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 class Experience(BaseModel):
