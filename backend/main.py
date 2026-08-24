@@ -161,14 +161,10 @@ def read_pdf(file_path: Path):
 
 @app.get("/")
 def home():
-    resume_path = Path(__file__).parent / "my_resume.pdf"
-    resume_text = read_pdf(resume_path)
-    resume=parse_resume(resume_text)
-    print(resume.model_dump_json(indent=2))
-    print(resume_text)
     return {
-       "message" : " AI resume parsed  !"
+        "message": "HireMe-AI backend is running!"
     }
+
 
 @app.post("/chat")
 def chat(request: ChatRequest):
@@ -176,7 +172,11 @@ def chat(request: ChatRequest):
 
     resume_text = read_pdf(resume_path)
     resume = parse_resume(resume_text)
-    answer = ask_candidate(request.question, resume)
+
+    answer = ask_candidate(
+        request.question,
+        resume
+    )
 
     return {
         "answer": answer
