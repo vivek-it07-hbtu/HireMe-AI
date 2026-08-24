@@ -11,8 +11,8 @@ from pypdf import PdfReader
 load_dotenv()
 my_api_key=os.getenv("GROQ_API_KEY")
 
-# if not my_api_key:
-#     raise ValueError("API key kaha hai bhai")
+if not my_api_key:
+    raise ValueError("API key kaha hai bhai")
 
 client=Groq(api_key=my_api_key)
 model = "openai/gpt-oss-120b"
@@ -173,8 +173,10 @@ def home():
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    resume_text=read_pdf(Path("my_resume.pdf"))
-    resume=parse_resume(resume_text)
+    resume_path = Path(__file__).parent / "my_resume.pdf"
+
+    resume_text = read_pdf(resume_path)
+    resume = parse_resume(resume_text)
     answer=ask_candidate(request.question, resume)
     return {
         "answer": answer
