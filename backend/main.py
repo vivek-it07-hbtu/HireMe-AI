@@ -11,15 +11,15 @@ from pypdf import PdfReader
 load_dotenv()
 my_api_key=os.getenv("GROQ_API_KEY")
 
-if not my_api_key:
-    raise ValueError("API key kaha hai bhai")
+# if not my_api_key:
+#     raise ValueError("API key kaha hai bhai")
 
 client=Groq(api_key=my_api_key)
 model = "openai/gpt-oss-120b"
 
 app=FastAPI()
 
-#parse resume
+
 class Experience(BaseModel):
     company: str | None = None
     role: str | None = None
@@ -41,7 +41,6 @@ class Resume(BaseModel):
     certifications: list[str] = []
 
 resume_schema = Resume.model_json_schema()
-
 
 class ChatRequest(BaseModel):
     question: str
@@ -93,6 +92,8 @@ say
 
     return response.choices[0].message.content
 
+
+#parse resume
 def parse_resume(resume_text):
     system_prompt = f"""
     You are an expert resume parser.
@@ -158,15 +159,16 @@ def read_pdf(file_path: Path):
         if page_text:
             text += page_text + "\n"
     return text
+
 @app.get("/")
 def home():
     # resume_text=read_pdf(Path("my_resume.pdf"))
     # resume=parse_resume(resume_text)
+    # print(resume_text)
+    # print(resume.model_dump_json(indent=2))
     return {
-        "message" : "Ye home page hai"
+        "message" : "AI h ye "
     }
-# chatgpt.cpom
-#chatgot.com/aceeddferre5e
 
 
 @app.post("/chat")
