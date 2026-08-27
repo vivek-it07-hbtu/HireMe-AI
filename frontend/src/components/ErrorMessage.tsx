@@ -1,0 +1,1 @@
+import { RefreshCw } from 'lucide-react'; export default function ErrorMessage({ onRetry }: { onRetry: () => void }) { return <div className="error-message" role="alert"><strong>I couldn't connect right now.</strong><span>Please check that the backend server is running and try again.</span><button onClick={onRetry}><RefreshCw size={15}/>Retry</button></div> }
