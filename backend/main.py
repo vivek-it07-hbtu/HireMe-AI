@@ -3,11 +3,12 @@ import json
 from dotenv import load_dotenv
 
 from groq import Groq
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from pathlib import Path
 from pydantic import BaseModel
 from pypdf import PdfReader
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 
 load_dotenv()
 my_api_key=os.getenv("GROQ_API_KEY")
@@ -19,11 +20,12 @@ client=Groq(api_key=my_api_key)
 model = "openai/gpt-oss-120b"
 
 app=FastAPI()
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
     ],
     allow_credentials=True,
     allow_methods=["*"],
@@ -181,14 +183,20 @@ def home():
         "message" : "AI h ye "
     }
 
+@app.get("/resume", response_class=FileResponse)
+def download_resume():
+    resume_path = Path(__file__).parent / "my_resume.pdf"
+    return FileResponse(resume_path, media_type="application/pdf", filename="Vivek-Chaudhary-Resume.pdf")
+
 
 @app.post("/chat")
 def chat(request: ChatRequest):
-    resume_path = Path(__file__).parent / "my_resume.pdf"
-
-    resume_text = read_pdf(resume_path)
-    resume = parse_resume(resume_text)
-    answer=ask_candidate(request.question, resume)
-    return {
-        "answer": answer
-    }
+    try:
+        resume_path = Path(__file__).parent / "my_resume.pdf"
+        resume_text = read_pdf(resume_path)
+        resume = parse_resume(resume_text)
+        answer = ask_candidate(request.question, resume)
+        return {"answer": answer}
+    except Exception as error:
+        print(f"Chat request failed: {error}")
+        raise HTTPException(status_code=503, detail="AI service is temporarily unavailable.") from error
