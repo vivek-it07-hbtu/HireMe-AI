@@ -1,0 +1,16 @@
+.side-logo .side-identity {
+  display: grid;
+  gap: 2px;
+  text-align: left;
+}
+
+.side-logo .side-identity strong {
+  font-size: 17px;
+  line-height: 1.15;
+}
+
+.side-logo .side-identity small {
+  color: #a7a7b0;
+  font-size: 12px;
+  font-weight: 500;
+}

@@ -1,4 +1,5 @@
-import { Download, Github, MessageSquarePlus, Settings, X, MessageSquare, Trash2 } from 'lucide-react'
+import { Download, Github, Linkedin, MessageSquarePlus, Settings, X, MessageSquare, Trash2 } from 'lucide-react'
+import './Sidebar.css'
 import { resumeDownloadUrl } from '../services/api'
 import type { ChatSession } from '../types/chat'
 
@@ -28,10 +29,13 @@ export default function Sidebar({
     <div className={open ? 'backdrop visible' : 'backdrop'} onClick={onClose}/>
     <aside className={open ? 'sidebar open' : 'sidebar'}>
       <div className="side-head">
-        <button className="side-logo" onClick={start} aria-label="New chat"><span>V</span> Vivek Chaudhary</button>
+        <button className="side-logo" onClick={start} aria-label="Start a new chat with Vivek Chaudhary">
+          <span>V</span>
+          <div className="side-identity"><strong>Vivek Chaudhary</strong><small>AI Engineer</small></div>
+        </button>
         <button className="icon-button close-side" onClick={onClose} aria-label="Close menu"><X size={19}/></button>
       </div>
-      <button className="new-chat" onClick={start}><MessageSquarePlus size={18}/>New chat</button>
+      <button className="new-chat" onClick={start}><MessageSquarePlus size={18}/>New Chat</button>
       
       <div className="history-label">Your conversations</div>
       <div className="session-list">
@@ -67,6 +71,7 @@ export default function Sidebar({
       <div className="side-bottom">
         <a href={resumeDownloadUrl}><Download size={18}/>Download resume</a>
         <a href="https://github.com/vivek-it07-hbtu/HireMe-AI" target="_blank" rel="noreferrer"><Github size={18}/>GitHub</a>
+        <a href="https://www.linkedin.com/in/vivek-chaudhary" target="_blank" rel="noreferrer"><Linkedin size={18}/>LinkedIn</a>
         <button onClick={() => alert('Settings are coming soon.')}><Settings size={18}/>Settings</button>
       </div>
     </aside>

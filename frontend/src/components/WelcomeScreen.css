@@ -1,0 +1,10 @@
+.welcome-role {
+  color: var(--primary);
+  font-weight: 700;
+  margin: 10px 0 0;
+}
+
+.welcome-subtitle {
+  font-style: italic;
+  margin-top: 7px;
+}

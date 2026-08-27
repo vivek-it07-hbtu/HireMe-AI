@@ -19,17 +19,19 @@ if not my_api_key:
 client=Groq(api_key=my_api_key)
 model = "openai/gpt-oss-120b"
 
-app = FastAPI()
-
+app=FastAPI()
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "https://frontend-psi-three-icya5kir92.vercel.app/"
+        "http://localhost:5173",
+        "http://127.0.0.1:5173",
+        "http://127.0.0.1:5174",
     ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
 
 class Experience(BaseModel):
     company: str | None = None

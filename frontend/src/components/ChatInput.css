@@ -1,0 +1,17 @@
+.chat-input .premium-send {
+  position: absolute;
+  background: linear-gradient(135deg, #776cff, #5145c7);
+  box-shadow: 0 0 18px #776cff80;
+}
+
+.chat-input .premium-send .send-arrow {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  stroke-width: 2.8;
+}
+
+.chat-input .premium-send:hover:not(:disabled) {
+  box-shadow: 0 0 25px #958cffb3;
+  transform: translateY(-1px);
+}
