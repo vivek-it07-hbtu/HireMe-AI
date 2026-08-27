@@ -26,7 +26,7 @@ build-backend = "uv_build"
 
 [tool.uv.workspace]
 members = [
-    "frontend",
+    "backend",
 ]
 [tool.vercel]
 entrypoint = "backend.main:app"
