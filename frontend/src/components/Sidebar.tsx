@@ -70,8 +70,8 @@ export default function Sidebar({
 
       <div className="side-bottom">
         <a href={resumeDownloadUrl}><Download size={18}/>Download resume</a>
-        <a href="https://github.com/vivek-it07-hbtu/HireMe-AI" target="_blank" rel="noreferrer"><Github size={18}/>GitHub</a>
-        <a href="https://www.linkedin.com/in/vivek-chaudhary" target="_blank" rel="noreferrer"><Linkedin size={18}/>LinkedIn</a>
+        <a href="https://github.com/vivek-it07-hbtu" target="_blank" rel="noreferrer"><Github size={18}/>GitHub</a>
+        <a href="https://www.linkedin.com/in/vivek-chaudhary-a3804a385/" target="_blank" rel="noreferrer"><Linkedin size={18}/>LinkedIn</a>
         <button onClick={() => alert('Settings are coming soon.')}><Settings size={18}/>Settings</button>
       </div>
     </aside>
